@@ -34,7 +34,7 @@ function Calendar2() {
 
     const datesHtml = [];
 
-    console.log(date, month, year);
+    // console.log(date, month, year);
     // console.log(start,endDate, end, endDatePrev);
 
     for (let i = start; i > 0; i--) {
@@ -49,18 +49,19 @@ function Calendar2() {
     for (let i = 1; i <= endDate; i++) {
       let style = "";
 
-      // Check for second Tuesday of the month
-      // if (date.getDay() === 2 && date.getDate() >= 8 && date.getDate() <= 14) {
-      //   style += " second-tuesday";
-      // }
-
+      // ✅Check for second Tuesday of the month
       const currentDate = new Date(year, month, i);
-      if (currentDate.getDay() === 2 && currentDate.getDate() >= 8 && currentDate.getDate() <= 14) {
+      if (
+        currentDate.getDay() === 2 &&
+        currentDate.getDate() >= 8 &&
+        currentDate.getDate() <= 14
+      ) {
         style += " second-tuesday";
       }
 
       // ✅Check for Monday
-      if ((endDatePrev - i + 4) % 7 === 1) {
+      if (currentDate.getDay() === 1) {
+        // Use currentDate.getDay() === 1
         style += " monday";
       }
 
@@ -103,11 +104,32 @@ function Calendar2() {
         </h1>
 
         <div className="flex justify-between">
-          <button>{/* <FaAngleLeft /> */}</button>
+          <button className="flex items-center justify-center border rounded-full size-7 active:scale-110">
+            <FaAngleLeft
+              onClick={() => {
+                console.log(month);
+                if (month == 0) {
+                  setYear((year) => year - 1);
+                  setMonth(12);
+                }
+                setMonth((month) => month - 1);              }}
+            />
+          </button>
           <h3 className="mb-3 text-xl font-light">
             {months[month]} {year}
           </h3>
-          <button>{/* <FaAngleRight /> */}</button>
+          <button className="flex items-center justify-center border rounded-full size-7 active:scale-110">
+            <FaAngleRight className=""
+              onClick={() => {
+                console.log(month);
+                if (month == 11) {
+                  setYear((year) => year + 1);
+                  setMonth(-1);
+                }
+                setMonth((month) => month + 1);
+              }}
+            />
+          </button>
         </div>
 
         <ul className="grid grid-cols-7 w-[340px] px-2 gap-1">
