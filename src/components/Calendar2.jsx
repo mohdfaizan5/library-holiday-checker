@@ -38,9 +38,6 @@ function Calendar2() {
     // console.log(start,endDate, end, endDatePrev);
 
     for (let i = start; i > 0; i--) {
-      const isMonday = (endDatePrev - i + 1) % 7 === 1;
-
-      const style = isMonday ? "monday" : "inactive";
       datesHtml.push(
         <li key={`inactive-${endDatePrev - i + 1}`} className={"inactive"}>
           {endDatePrev - i + 1}
@@ -48,21 +45,37 @@ function Calendar2() {
       );
     }
 
+    // Actual dates
     for (let i = 1; i <= endDate; i++) {
-      const isToday =
-        i === date.getDate() &&
-        month === date.getMonth() &&
-        year === date.getFullYear();
-      let style = isToday ? "today" : "";
+      let style = "";
 
-      // Check for second Tuesday
-      if ((i + start - 1) % 7 === 1 && (i + start) / 7 === 2) {
+      // Check for second Tuesday of the month
+      // if (date.getDay() === 2 && date.getDate() >= 8 && date.getDate() <= 14) {
+      //   style += " second-tuesday";
+      // }
+
+      const currentDate = new Date(year, month, i);
+      if (currentDate.getDay() === 2 && currentDate.getDate() >= 8 && currentDate.getDate() <= 14) {
         style += " second-tuesday";
       }
 
-      // Check for fourth Saturday
-      if ((i + start - 1) % 7 === 6 && (i + start) / 7 >= 4) {
+      // ✅Check for Monday
+      if ((endDatePrev - i + 4) % 7 === 1) {
+        style += " monday";
+      }
+
+      // ✅Check for fourth Saturday
+      if ((i + start - 1) % 7 === 6 && (i + start) / 7 == 4) {
         style += " fourth-saturday";
+      }
+
+      // ✅Check for today
+      if (
+        i === date.getDate() &&
+        month === date.getMonth() &&
+        year === date.getFullYear()
+      ) {
+        style += " today";
       }
 
       datesHtml.push(
@@ -72,6 +85,7 @@ function Calendar2() {
       );
     }
 
+    // Last dates
     for (let i = end; i < 6; i++) {
       let style = "inactive";
       datesHtml.push(
@@ -89,18 +103,14 @@ function Calendar2() {
         </h1>
 
         <div className="flex justify-between">
-          <button>
-            <FaAngleLeft />
-          </button>
+          <button>{/* <FaAngleLeft /> */}</button>
           <h3 className="mb-3 text-xl font-light">
             {months[month]} {year}
           </h3>
-          <button>
-            <FaAngleRight />
-          </button>
+          <button>{/* <FaAngleRight /> */}</button>
         </div>
 
-        <ul className="grid grid-cols-7 w-[340px] px-2">
+        <ul className="grid grid-cols-7 w-[340px] px-2 gap-1">
           {days.map((day) => (
             <li key={`${day}day`} className={"day`"}>
               {day}
@@ -108,7 +118,6 @@ function Calendar2() {
           ))}
           {datesHtml}
         </ul>
-        {/* Add navigation buttons here */}
       </div>
     );
   };

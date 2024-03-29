@@ -4,20 +4,31 @@
 
 @layer components{
   .date{
-    @apply rounded-full bg-slate-600 size-6 text-white flex justify-center items-center
+    @apply rounded-full bg-slate-600 size-7 text-white flex justify-center items-center
   }
   .date-holiday{
-    @apply rounded-full bg-red-400 size-6 text-white flex justify-center items-center
+    @apply rounded-full bg-red-600 size-7 text-white flex justify-center items-center
   }
-  .monday{
-    @apply rounded-full bg-red-400 size-6 text-white flex justify-center items-center
+  .monday {
+    @apply rounded-full bg-red-600 size-7 text-white flex justify-center items-center
   }
+  .fourth-saturday {
+    @apply rounded-full bg-red-600 size-7 text-white flex justify-center items-center
+  }
+  .second-tuesday {
+    @apply rounded-full bg-red-600 size-7 text-white flex justify-center items-center
+  }
+  .today {
+    @apply rounded-full bg-blue-700 size-7 text-white flex justify-center items-center
+  }
+
+
   .day{
-    @apply size-8 flex items-center justify-center
+    @apply size-7 flex items-center justify-center
   }
 
   li{
-    @apply  size-8 text-white flex justify-center items-center
+    @apply  size-7 text-white flex justify-center items-center
   }
 
   .inactive{
