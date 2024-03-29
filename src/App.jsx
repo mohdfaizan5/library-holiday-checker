@@ -1,12 +1,14 @@
 import React from "react";
 import Calendar2 from "./components/Calendar2";
-import ChatBubble from "./components/ChatBubble";
 import { Helmet } from "react-helmet";
-import { Schema } from "react-schema.org"; // Schema.org library
+// import { Schema } from "react-schema.org"; // Schema.org library
+import { Analytics } from "@vercel/analytics/react";
 
 const App = () => {
   return (
     <div className="flex flex-col items-center h-[100vh] justify-center">
+      <Analytics />
+
       <Helmet>
         <title>BTM Library Hours & Calendar</title>
         <meta
@@ -18,7 +20,7 @@ const App = () => {
           content="BTM library, library hours, library calendar, closures, study planning"
         />
       </Helmet>
-      <Schema
+      {/* <Schema
         orgName="BTM Library"
         openingHoursSpecification={[
           {
@@ -37,7 +39,7 @@ const App = () => {
             closes: "Closed", // Indicate closure
           },
         ]}
-      />
+      /> */}
 
       {/* <h1 className="[&::selection]:text-base-content relative col-start-1 row-start-1 bg-[linear-gradient(90deg,theme(colors.error)_0%,theme(colors.secondary)_9%,theme(colors.secondary)_42%,theme(colors.primary)_47%,theme(colors.accent)_100%)] bg-clip-text [-webkit-text-fill-color:transparent] [&::selection]:bg-blue-700/20 [@supports(color:oklch(0%_0_0))]:bg-[linear-gradient(90deg,oklch(var(--s))_4%,color-mix(in_oklch,oklch(var(--s)),oklch(var(--er)))_22%,oklch(var(--p))_45%,color-mix(in_oklch,oklch(var(--p)),oklch(var(--a)))_67%,oklch(var(--a))_100.2%)] text-3xl font-bold" >Faizan</h1> */}
       <Calendar2 />
