@@ -9,6 +9,7 @@ export default {
   },
   plugins: [require("daisyui")],
   daisyui:{
-    themes: ["black", "dim"]
+    themes: ["black"]
+    // , "dim"
   }
 }
