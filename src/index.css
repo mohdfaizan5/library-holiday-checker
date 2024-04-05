@@ -12,6 +12,9 @@
   .monday {
     @apply rounded-full bg-red-600 size-7 text-white flex justify-center items-center
   }
+  .gov_holiday {
+    @apply rounded-full bg-indigo-800 size-7 text-white flex justify-center items-center
+  }
   .fourth-saturday {
     @apply rounded-full bg-red-600 size-7 text-white flex justify-center items-center
   }
