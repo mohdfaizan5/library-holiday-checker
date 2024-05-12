@@ -1,48 +1,207 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
+import { FaAngleRight } from "react-icons/fa6";
+import { FaAngleLeft } from "react-icons/fa6";
 
-function Calendar({ dates = [] }) {
-  const today = new Date();
+const gov_holidays = [
+  { name: "Republic Day", date: "2024-01-26" },
+  { name: "Good Friday", date: "2024-03-29" },
+  {
+    name: "Chaitra Sukladi /Gudi Padava / Ugadi Cheti Chand",
+    date: "2024-04-09",
+  },
+  { name: "Id-ul-Fitr", date: "2024-04-11" },
+  { name: "Mahavir Jayanthi", date: "2024-04-21" },
+  { name: "Ambedkar Jayanthi", date: "2024-04-14" },
 
-  const renderDay = (date) => {
-    const isToday = date.getDate() === today.getDate() &&
-      date.getMonth() === today.getMonth() &&
-      date.getFullYear() === today.getFullYear();
-    const isHighlighted = dates.includes(date.getTime());
-    const classes = `day ${isToday ? 'today' : ''} ${isHighlighted ? 'highlighted' : ''}`;
+  { name: "Buddha Purnima", date: "2024-05-23" },
+  { name: "May day", date: "2024-05-1" },
+  { name: "Basava Jayanti", date: "2024-05-10" },
 
+  { name: "Id-ul-Zuha (Bakrid)", date: "2024-06-17" },
+  { name: "Muharram", date: "2024-07-17" },
+  { name: "Independence Day", date: "2024-08-15" },
+  { name: "Ganesh Chaturthi", date: "2024-09-07" },
+  {
+    name: "Milad-Un-Nabi (Birthday of Prophet Mohammad)",
+    date: "2024-09-16",
+  },
+  { name: "Mahatma Gandhi's Birthday", date: "2024-10-02" },
+  { name: "Dussehra [Mahanavarni]", date: "2024-10-11" },
+  { name: "Dussehra (Vijay Dashmi)", date: "2024-10-12" },
+  { name: "Diwali (Deepavali)", date: "2024-10-31" },
+  { name: "Valmiki Jayanti", date: "2024-10-17" },
+  { name: "Karnataka Rajotsav", date: "2024-11-1" },
+  { name: "Balapadi~", date: "2024-11-2" },
+  { name: "Kanakadasa Jayanti", date: "2024-11-18" },
+  { name: "Christmas Day", date: "2024-12-25" },
+];
+
+function Calendar2() {
+  const [date, setDate] = useState(new Date());
+  const [month, setMonth] = useState(date.getMonth());
+  const [year, setYear] = useState(date.getFullYear());
+
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  useEffect(() => {
+    renderCalendar();
+  }, [month, year]);
+
+  const renderCalendar = () => {
+    const start = new Date(year, month, 1).getDay();
+    const endDate = new Date(year, month + 1, 0).getDate();
+    const end = new Date(year, month, endDate).getDay();
+    const endDatePrev = new Date(year, month, 0).getDate();
+
+    const datesHtml = [];
+
+    // console.log(date, month, year);
+    // console.log(start,endDate, end, endDatePrev);
+
+    for (let i = start; i > 0; i--) {
+      datesHtml.push(
+        <li key={`inactive-${endDatePrev - i + 1}`} className={"inactive"}>
+          {endDatePrev - i + 1}
+        </li>
+      );
+    }
+
+    // Actual dates
+    for (let i = 1; i <= endDate; i++) {
+      let style = "";
+
+      // ✅Check for second Tuesday of the month
+      const currentDate = new Date(year, month, i);
+      if (
+        currentDate.getDay() === 2 &&
+        currentDate.getDate() >= 8 &&
+        currentDate.getDate() <= 14
+      ) {
+        style += " second-tuesday";
+      }
+
+      // ✅Check for Monday
+      if (currentDate.getDay() === 1) {
+        // Use currentDate.getDay() === 1
+        style += " monday";
+      }
+
+      // ✅Check for fourth Saturday
+      if ((i + start - 1) % 7 === 6 && (i + start) / 7 == 4) {
+        style += " fourth-saturday";
+      }
+
+      // Check for government holidays
+      gov_holidays.forEach((each) => {
+        if (
+          currentDate.getMonth() + 1 === parseInt(each.date.slice(5, 7)) &&
+          currentDate.getFullYear() === parseInt(each.date.slice(0, 4)) &&
+          currentDate.getDate() === parseInt(each.date.slice(8, 10))
+        ) {
+          style += " gov_holiday";
+          console.log(each.name);
+        }
+
+        /*
+        console.log(Number(each.date.split("-")[0]), currentDate.getFullYear());
+        console.log(Number(each.date.split("-")[1]), currentDate.getMonth());
+        console.log(Number(each.date.split("-")[2]), currentDate.getDate());
+        if (
+          Number(each.date.split("-")[0]) == currentDate.getFullYear() &&
+          Number(each.date.split("-")[0]) == currentDate.getFullYear() &&
+          Number(each.date.split("-")[0]) == currentDate.getFullYear()
+        )
+        // style += " gov_holiday";
+        console.log(true)
+        */
+      });
+
+      // ✅Check for today
+      if (
+        i === date.getDate() &&
+        month === date.getMonth() &&
+        year === date.getFullYear()
+      ) {
+        style += " today";
+      }
+
+      datesHtml.push(
+        <li key={i} className={style}>
+          {i}
+        </li>
+      );
+    }
+
+    // Last dates
+    for (let i = end; i < 6; i++) {
+      let style = "inactive";
+      datesHtml.push(
+        <li key={`inactive-${i + 1}`} className={style}>
+          {i - end + 1}
+        </li>
+      );
+    }
+
+    const days = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
     return (
-      <td key={date.getTime()} className={classes}>
-        {date.getDate()}
-      </td>
+      <div className="p-5 mt-6 border rounded-3xl calendar">
+        <div className="flex justify-between ">
+          <button className="flex items-center justify-center border rounded-full size-7 active:scale-110">
+            <FaAngleLeft
+              onClick={() => {
+                console.log(month);
+                if (month == 0) {
+                  setYear((year) => year - 1);
+                  setMonth(12);
+                }
+                setMonth((month) => month - 1);
+              }}
+            />
+          </button>
+          <h3 className="mb-3 text-xl font-light">
+            {months[month]} {year}
+          </h3>
+          <button className="flex items-center justify-center border rounded-full size-7 active:scale-110">
+            <FaAngleRight
+              className=""
+              onClick={() => {
+                console.log(month);
+                if (month == 11) {
+                  setYear((year) => year + 1);
+                  setMonth(-1);
+                }
+                setMonth((month) => month + 1);
+              }}
+            />
+          </button>
+        </div>
+
+        <ul className="grid grid-cols-7 w-[340px] px-2 gap-1">
+          {days.map((day) => (
+            <li key={`${day}day`} className={"day`"}>
+              {day}
+            </li>
+          ))}
+          {datesHtml}
+        </ul>
+      </div>
     );
   };
 
-  const days = [
-    // Generate an array of Date objects representing all days in a month
-  ];
-
-  return (
-    <table>
-      <thead>
-        <tr>
-          <th>Sun</th>
-          <th>Mon</th>
-          <th>Tue</th>
-          <th>Wed</th>
-          <th>Thu</th>
-          <th>Fri</th>
-          <th>Sat</th>
-        </tr>
-      </thead>
-      <tbody>
-        {days.map((row, rowIndex) => (
-          <tr key={rowIndex}>
-            {row.map(renderDay)}
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  );
+  return renderCalendar();
 }
 
-export default Calendar;
+export default Calendar2;
