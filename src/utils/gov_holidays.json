@@ -1,0 +1,33 @@
+[
+  { "name": "Republic Day", "date": "2024-01-26" },
+  { "name": "Good Friday", "date": "2024-03-29" },
+  {
+    "name": "Chaitra Sukladi /Gudi Padava / Ugadi Cheti Chand",
+    "date": "2024-04-09"
+  },
+  { "name": "Id-ul-Fitr", "date": "2024-04-11" },
+  { "name": "Mahavir Jayanthi", "date": "2024-04-21" },
+  { "name": "Ambedkar Jayanthi", "date": "2024-04-14" },
+
+  { "name": "Buddha Purnima", "date": "2024-05-23" },
+  { "name": "May day", "date": "2024-05-1" },
+  { "name": "Basava Jayanti", "date": "2024-05-10" },
+
+  { "name": "Id-ul-Zuha (Bakrid)", "date": "2024-06-17" },
+  { "name": "Muharram", "date": "2024-07-17" },
+  { "name": "Independence Day", "date": "2024-08-15" },
+  { "name": "Ganesh Chaturthi", "date": "2024-09-07" },
+  {
+    "name": "Milad-Un-Nabi (Birthday of Prophet Mohammad)",
+    "date": "2024-09-16"
+  },
+  { "name": "Mahatma Gandhi's Birthday", "date": "2024-10-02" },
+  { "name": "Dussehra [Mahanavarni]", "date": "2024-10-11" },
+  { "name": "Dussehra (Vijay Dashmi)", "date": "2024-10-12" },
+  { "name": "Diwali (Deepavali)", "date": "2024-10-31" },
+  { "name": "Valmiki Jayanti", "date": "2024-10-17" },
+  { "name": "Karnataka Rajotsav", "date": "2024-11-1" },
+  { "name": "Balapadi~", "date": "2024-11-2" },
+  { "name": "Kanakadasa Jayanti", "date": "2024-11-18" },
+  { "name": "Christmas Day", "date": "2024-12-25" }
+]

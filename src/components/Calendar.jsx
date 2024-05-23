@@ -1,60 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { FaAngleRight } from "react-icons/fa6";
 import { FaAngleLeft } from "react-icons/fa6";
+import months from "../utils/months.json"
+// import gov_holidays from "../utils/gov_holidays.json"
 
-const gov_holidays = [
-  { name: "Republic Day", date: "2024-01-26" },
-  { name: "Good Friday", date: "2024-03-29" },
-  {
-    name: "Chaitra Sukladi /Gudi Padava / Ugadi Cheti Chand",
-    date: "2024-04-09",
-  },
-  { name: "Id-ul-Fitr", date: "2024-04-11" },
-  { name: "Mahavir Jayanthi", date: "2024-04-21" },
-  { name: "Ambedkar Jayanthi", date: "2024-04-14" },
-
-  { name: "Buddha Purnima", date: "2024-05-23" },
-  { name: "May day", date: "2024-05-1" },
-  { name: "Basava Jayanti", date: "2024-05-10" },
-
-  { name: "Id-ul-Zuha (Bakrid)", date: "2024-06-17" },
-  { name: "Muharram", date: "2024-07-17" },
-  { name: "Independence Day", date: "2024-08-15" },
-  { name: "Ganesh Chaturthi", date: "2024-09-07" },
-  {
-    name: "Milad-Un-Nabi (Birthday of Prophet Mohammad)",
-    date: "2024-09-16",
-  },
-  { name: "Mahatma Gandhi's Birthday", date: "2024-10-02" },
-  { name: "Dussehra [Mahanavarni]", date: "2024-10-11" },
-  { name: "Dussehra (Vijay Dashmi)", date: "2024-10-12" },
-  { name: "Diwali (Deepavali)", date: "2024-10-31" },
-  { name: "Valmiki Jayanti", date: "2024-10-17" },
-  { name: "Karnataka Rajotsav", date: "2024-11-1" },
-  { name: "Balapadi~", date: "2024-11-2" },
-  { name: "Kanakadasa Jayanti", date: "2024-11-18" },
-  { name: "Christmas Day", date: "2024-12-25" },
-];
 
 function Calendar2() {
   const [date, setDate] = useState(new Date());
   const [month, setMonth] = useState(date.getMonth());
   const [year, setYear] = useState(date.getFullYear());
-
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
 
   useEffect(() => {
     renderCalendar();
@@ -105,29 +59,29 @@ function Calendar2() {
       }
 
       // Check for government holidays
-      gov_holidays.forEach((each) => {
-        if (
-          currentDate.getMonth() + 1 === parseInt(each.date.slice(5, 7)) &&
-          currentDate.getFullYear() === parseInt(each.date.slice(0, 4)) &&
-          currentDate.getDate() === parseInt(each.date.slice(8, 10))
-        ) {
-          style += " gov_holiday";
-          console.log(each.name);
-        }
+      // gov_holidays.forEach((each) => {
+      //   if (
+      //     currentDate.getMonth() + 1 === parseInt(each.date.slice(5, 7)) &&
+      //     currentDate.getFullYear() === parseInt(each.date.slice(0, 4)) &&
+      //     currentDate.getDate() === parseInt(each.date.slice(8, 10))
+      //   ) {
+      //     style += " gov_holiday";
+      //     console.log(each.name);
+      //   }
 
-        /*
-        console.log(Number(each.date.split("-")[0]), currentDate.getFullYear());
-        console.log(Number(each.date.split("-")[1]), currentDate.getMonth());
-        console.log(Number(each.date.split("-")[2]), currentDate.getDate());
-        if (
-          Number(each.date.split("-")[0]) == currentDate.getFullYear() &&
-          Number(each.date.split("-")[0]) == currentDate.getFullYear() &&
-          Number(each.date.split("-")[0]) == currentDate.getFullYear()
-        )
-        // style += " gov_holiday";
-        console.log(true)
-        */
-      });
+      //   /*
+      //   console.log(Number(each.date.split("-")[0]), currentDate.getFullYear());
+      //   console.log(Number(each.date.split("-")[1]), currentDate.getMonth());
+      //   console.log(Number(each.date.split("-")[2]), currentDate.getDate());
+      //   if (
+      //     Number(each.date.split("-")[0]) == currentDate.getFullYear() &&
+      //     Number(each.date.split("-")[0]) == currentDate.getFullYear() &&
+      //     Number(each.date.split("-")[0]) == currentDate.getFullYear()
+      //   )
+      //   // style += " gov_holiday";
+      //   console.log(true)
+      //   */
+      // });
 
       // ✅Check for today
       if (
@@ -156,6 +110,7 @@ function Calendar2() {
     }
 
     const days = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
+    
     return (
       <div className="p-5 mt-6 border rounded-3xl calendar">
         <div className="flex justify-between ">
